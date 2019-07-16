@@ -13,40 +13,37 @@ def create_app(test_config=None):
         os.makedirs(app.instance_path)
     except OSError:
         pass
-
-    def todo_view(todos):
-        the_view = 'List of my todos:' + '<br/>'
-        for todo in todos:
-            the_view += ( todo + '<br/>' )
-
-        the_view += '---- LIST ENDS HERE ---'
-        return the_view
-
-    def get_todos_by_name(name):
-        if name == 'depo':
-            return ['Go for run', 'Listen Rock Music']
-        elif name == 'shivang':
-            return ['Read book', 'Play Fifa', 'Drink Coffee']
-        elif name == 'raj':
-            return ['Study', 'Brush']
-        elif name == 'sanket':
-            return ['Sleep', 'Code']
-        elif name == 'aagam':
-            return ['play cricket', 'have tea']
-        else:
-            return []
-
-
-    # http://127.0.0.1:5000/todos?name=duster
+    def todo_view(mtodos):
+	       the_view = 'List of my todos' +'<br>'
+	       for i in mtodos:
+		   the_view += ( i + '<br>' )
+	       the_view += 'the list ends here'
+	       return the_view 
+    #http://127.0.0.1:5000/todos?name=ravi
+    def get_name(name):
+	if(name=='shivang'):
+	       return ["sleep again",'Go for run','listen kshay kumar music'] 
+	elif(name=='Manish'):
+	       return ['parents','freshness','study','exercise','be ready for work','breakfst','go for work']
+	elif(name=='depo'):
+		return ['cofee','Go for run','listen kshay kumar music']
+	elif(name=='Sanket'):
+		return ['parents','freshness','study','exercise','be ready for work','breakfst']
+	elif(name=='adam'):
+		return ['play cricket','Go for run','listen kshay kumar music']
+	else:
+		return ["name is not in list"]
     @app.route('/todos')
     def todos():
-        name = request.args.get('name')
-        print('---------')
-        print(name)
-        print('---------')
-
-        person_todo_list = get_todos_by_name(name)
-        return todo_view(person_todo_list)
-
+	name=request.args.get('name')
+	print("______________")
+	print(name)
+	print("______________")
+	
+	my_todos=get_name(name)
+	return todo_view(my_todos)
+	  
+  
     return app
+
 
